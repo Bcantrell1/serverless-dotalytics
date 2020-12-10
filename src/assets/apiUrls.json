@@ -1,0 +1,15 @@
+{
+    "player": {
+        "data": "https://api.opendota.com/api/players/{param_Id}",
+        "recent": "https://api.opendota.com/api/players/{param_Id}/recentMatches",
+        "winLoss": "https://api.opendota.com/api/players/{param_Id}/wl",
+        "totals": "https://api.opendota.com/api/players/{param_Id}/totals",
+        "counts": "https://api.opendota.com/api/players/{param_Id}/counts",
+        "heros": "https://api.opendota.com/api/players/{param_Id}/heroes"
+    },
+    "matches": "https://api.opendota.com/api/matches/{param_Id}",
+    "images": {
+        "items": "http://cdn.dota2.com/apps/dota2/images/items/{param_Id}_lg.png",
+        "heros": "http://cdn.dota2.com/apps/dota2/images/heroes/{param_Id}_lg.png"
+    }
+}
