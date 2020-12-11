@@ -1,10 +1,27 @@
 <template>
-  <div>
-    <h2>Enter your steam Id to login</h2>
-    <input v-model="id" />
-    <button @click="login(id)">Sign In</button>
-    <p>{{ id }}</p>
-  </div>
+  <section class="hero is-fullheight">
+    <div class="hero-body has-text-centered">
+      <div class="login">
+        <div class="field">
+          <div class="control">
+            <input
+              placeholder="Your Steam Id"
+              class="input is-medium is-rounded"
+              v-model="id"
+              required
+            />
+          </div>
+        </div>
+        <br />
+        <button
+          class="button is-block is-fullwidth is-primary is-medium is-rounded"
+          @click="login(id)"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -30,4 +47,18 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.hero-body {
+  justify-content: center;
+}
+
+.login {
+  border-radius: 25px;
+  padding: 1.5rem;
+  box-shadow: 8px 8px 15px var(--shadowDark), -8px -8px 15px var(--shadowLight);
+}
+
+a {
+  font-weight: 600;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="has-background-light" id="app">
+  <div class="has-background-dark has-text-light" id="app">
     <NavBar />
     <router-view />
   </div>

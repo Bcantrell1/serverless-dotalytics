@@ -54,7 +54,7 @@
         </div>
       </section>
       <br />
-      <hr />
+
       <br />
       <!-- Most Played Section -->
       <section>
@@ -81,7 +81,7 @@
                 <figure class="image">
                   <img
                     class="is-square"
-                    :src="convertHeroIdToImage(hero.hero_id)"
+                    :src="convertIdToImage(hero.hero_id, heros)"
                   />
                 </figure>
               </div>
@@ -94,7 +94,6 @@
         </div>
       </section>
       <br />
-      <hr />
       <br />
 
       <!-- Recent Matches Section -->
@@ -109,9 +108,11 @@
           </div>
         </div>
         <br />
-        <table class="table is-fullwidth">
+        <table
+          class="table is-fullwidth is-hoverable has-background-dark has-text-light"
+        >
           <thead>
-            <tr class="is-size-5">
+            <tr class="is-size-5 has-background-light">
               <th>Match Id</th>
               <th><SwordCross></SwordCross></th>
               <th><EmoticonDead></EmoticonDead></th>
@@ -121,7 +122,10 @@
           <tbody>
             <tr v-for="match in matchInfo.data" :key="match.data">
               <td>
-                <router-link :to="'/matches/' + match.match_id">
+                <router-link
+                  class="has-text-link"
+                  :to="'/matches/' + match.match_id"
+                >
                   {{ match.match_id }}
                 </router-link>
               </td>
@@ -141,13 +145,13 @@ import { SwordCross, EmoticonDead, CheckBold, Handshake } from "mdue";
 import makeAPICall from "../hooks/makeAPICall";
 import { computed } from "vue";
 import store from "../store/index";
-import json from "../assets/apiUrls.json";
+import json from "../assets/constants/apiUrls.json";
 import heros from "../assets/constants/hero_names.json";
 
-function convertHeroIdToImage(hero) {
-  let entries = Object.entries(heros[0]);
+function convertIdToImage(id, list) {
+  let entries = Object.entries(list[0]);
   for (let i = 0; i < entries.length; i++) {
-    if (hero == entries[i][1].id) {
+    if (id == entries[i][1].id) {
       return entries[i][1].img;
     }
   }
@@ -177,7 +181,8 @@ export default {
       heroInfo,
       matchInfo,
       wlInfo,
-      convertHeroIdToImage,
+      heros,
+      convertIdToImage,
     };
   },
 };

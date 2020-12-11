@@ -15,7 +15,7 @@
       <section class="columns">
         <!-- Radiant Players -->
         <div class="column">
-          <div class="hero is-primary ">
+          <div class="hero is-success ">
             <div class="hero-body ">
               <div class="container ">
                 <p
@@ -33,8 +33,10 @@
             :key="players.account_id"
           >
             <div v-if="players.isRadiant">
-              <div class="card m-3 card-height">
-                <div class="content has-text-centered">
+              <div
+                class="card m-3 card-height has-background-primary has-text-light"
+              >
+                <div class="content has-text-centered ">
                   <p class="is-size-5" v-if="players.account_id != null">
                     {{ players.personaname }}
                   </p>
@@ -44,7 +46,7 @@
                 <div class="content m-3">
                   <figure class="avatar">
                     <div class="rad">
-                      <img :src="convertHeroIdToImage(players.hero_id)" />
+                      <img :src="convertIdToImage(players.hero_id, heros)" />
                     </div>
                   </figure>
                 </div>
@@ -57,41 +59,41 @@
                 </div>
 
                 <!-- Player Items -->
-                <div class="is-flex">
+                <div class="is-flex is-justify-content-space-between">
                   <div class="image">
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_0)"
+                      :src="convertIdToImage(players.item_0, items)"
                     />
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_1)"
+                      :src="convertIdToImage(players.item_1, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_2)"
+                      :src="convertIdToImage(players.item_2, items)"
                     />
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_3)"
-                    />
-                  </div>
-                  <div class="image">
-                    <img
-                      class="items"
-                      :src="convertItemIdToImage(players.item_4)"
-                    />
-                    <img
-                      class="items"
-                      :src="convertItemIdToImage(players.item_5)"
+                      :src="convertIdToImage(players.item_3, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_neutral)"
+                      :src="convertIdToImage(players.item_4, items)"
+                    />
+                    <img
+                      class="items"
+                      :src="convertIdToImage(players.item_5, items)"
+                    />
+                  </div>
+                  <div class="image">
+                    <img
+                      class="items"
+                      :src="convertIdToImage(players.item_neutral, items)"
                     />
                   </div>
                 </div>
@@ -104,7 +106,7 @@
         </div>
 
         <!-- Dire Players -->
-        <div class="column">
+        <div class="column ">
           <div class="hero is-danger">
             <div class="hero-body">
               <div class="container">
@@ -124,7 +126,9 @@
             :key="players.account_id"
           >
             <div v-if="!players.isRadiant">
-              <div class="card m-3 card-height">
+              <div
+                class="card m-3 card-height has-background-primary has-text-light"
+              >
                 <div class="content has-text-centered">
                   <p class="is-size-5" v-if="players.account_id != null">
                     {{ players.personaname }}
@@ -135,7 +139,7 @@
                 <div class="content m-3">
                   <figure class="avatar">
                     <div class="dire">
-                      <img :src="convertHeroIdToImage(players.hero_id)" />
+                      <img :src="convertIdToImage(players.hero_id, heros)" />
                     </div>
                   </figure>
                 </div>
@@ -148,41 +152,41 @@
                 </div>
 
                 <!-- Player Items -->
-                <div class="is-flex">
+                <div class="is-flex is-justify-content-space-between">
                   <div class="image">
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_0)"
+                      :src="convertIdToImage(players.item_0, items)"
                     />
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_1)"
+                      :src="convertIdToImage(players.item_1, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_2)"
+                      :src="convertIdToImage(players.item_2, items)"
                     />
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_3)"
-                    />
-                  </div>
-                  <div class="image">
-                    <img
-                      class="items"
-                      :src="convertItemIdToImage(players.item_4)"
-                    />
-                    <img
-                      class="items"
-                      :src="convertItemIdToImage(players.item_5)"
+                      :src="convertIdToImage(players.item_3, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items"
-                      :src="convertItemIdToImage(players.item_neutral)"
+                      :src="convertIdToImage(players.item_4, items)"
+                    />
+                    <img
+                      class="items"
+                      :src="convertIdToImage(players.item_5, items)"
+                    />
+                  </div>
+                  <div class="image">
+                    <img
+                      class="items"
+                      :src="convertIdToImage(players.item_neutral, items)"
                     />
                   </div>
                 </div>
@@ -202,23 +206,14 @@
 import makeAPICall from "../hooks/makeAPICall";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import json from "../assets/apiUrls.json";
+import json from "../assets/constants/apiUrls.json";
 import heros from "../assets/constants/hero_names.json";
 import items from "../assets/constants/items.json";
 
-function convertHeroIdToImage(hero) {
-  let entries = Object.entries(heros[0]);
+function convertIdToImage(id, list) {
+  let entries = Object.entries(list[0]);
   for (let i = 0; i < entries.length; i++) {
-    if (hero == entries[i][1].id) {
-      return entries[i][1].img;
-    }
-  }
-}
-
-function convertItemIdToImage(item) {
-  let entries = Object.entries(items[0]);
-  for (let i = 0; i < entries.length; i++) {
-    if (item == entries[i][1].id) {
+    if (id == entries[i][1].id) {
       return entries[i][1].img;
     }
   }
@@ -234,8 +229,9 @@ export default {
     return {
       matchInfo,
       route,
-      convertHeroIdToImage,
-      convertItemIdToImage,
+      items,
+      heros,
+      convertIdToImage,
     };
   },
 };
