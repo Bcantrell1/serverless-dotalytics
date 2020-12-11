@@ -52,47 +52,60 @@
                 </div>
 
                 <!-- Player Game Info -->
-                <div>
-                  <p>Kills: {{ players.kills }}</p>
-                  <p>Deaths: {{ players.deaths }}</p>
-                  <p>Assists: {{ players.assists }}</p>
+                <div
+                  class="is-flex m-3 is-size-5 is-justify-content-space-between"
+                >
+                  <div class="ml-5">
+                    <p>Kills: {{ players.kills }}</p>
+                    <p>Deaths: {{ players.deaths }}</p>
+                    <p>Assists: {{ players.assists }}</p>
+                  </div>
+                  <div>
+                    <p>GPM {{ players.gold_per_min }}</p>
+                    <p>XPM {{ players.xp_per_min }}</p>
+                  </div>
+                  <div class="mr-5">
+                    <p>Hero Dmg: {{ players.hero_damage }}</p>
+                    <p>Tower Dmg: {{ players.tower_damage }}</p>
+                    <p>Healing: {{ players.hero_healing }}</p>
+                  </div>
                 </div>
 
                 <!-- Player Items -->
-                <div class="is-flex is-justify-content-space-between">
+                <div class="is-flex  mx-5 is-justify-content-space-between">
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_0, items)"
                     />
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_1, items)"
                     />
                   </div>
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_2, items)"
                     />
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_3, items)"
                     />
                   </div>
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_4, items)"
                     />
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_5, items)"
                     />
                   </div>
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_neutral, items)"
                     />
                   </div>
@@ -145,47 +158,60 @@
                 </div>
 
                 <!-- Player Game Info -->
-                <div>
-                  <p>Kills: {{ players.kills }}</p>
-                  <p>Deaths: {{ players.deaths }}</p>
-                  <p>Assists: {{ players.assists }}</p>
+                <div
+                  class="is-flex m-3 is-size-5 is-justify-content-space-between"
+                >
+                  <div class="ml-5">
+                    <p>Kills: {{ players.kills }}</p>
+                    <p>Deaths: {{ players.deaths }}</p>
+                    <p>Assists: {{ players.assists }}</p>
+                  </div>
+                  <div>
+                    <p>GPM {{ players.gold_per_min }}</p>
+                    <p>XPM {{ players.xp_per_min }}</p>
+                  </div>
+                  <div class="mr-5">
+                    <p>Hero Dmg: {{ players.hero_damage }}</p>
+                    <p>Tower Dmg: {{ players.tower_damage }}</p>
+                    <p>Healing: {{ players.hero_healing }}</p>
+                  </div>
                 </div>
 
                 <!-- Player Items -->
-                <div class="is-flex is-justify-content-space-between">
+                <div class="is-flex  mx-5 is-justify-content-space-between">
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_0, items)"
                     />
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_1, items)"
                     />
                   </div>
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_2, items)"
                     />
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_3, items)"
                     />
                   </div>
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_4, items)"
                     />
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_5, items)"
                     />
                   </div>
                   <div class="image">
                     <img
-                      class="items"
+                      class="items m-2"
                       :src="convertIdToImage(players.item_neutral, items)"
                     />
                   </div>
@@ -243,7 +269,7 @@ export default {
 }
 
 .card-height {
-  height: 27em;
+  height: 29em;
 }
 
 //Item icons

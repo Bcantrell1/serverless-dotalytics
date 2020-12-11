@@ -26,6 +26,9 @@
                 MMR estimate : {{ profileInfo.data.mmr_estimate.estimate }}
                 <br />
                 Rank tier: {{ profileInfo.data.rank_tier }}
+                <br />
+                Win Rate:
+                {{ helper.winRate(wlInfo.data.win, wlInfo.data.lose) + "%" }}
               </p>
             </div>
           </div>
@@ -81,7 +84,7 @@
                 <figure class="image">
                   <img
                     class="is-square"
-                    :src="convertIdToImage(hero.hero_id, heros)"
+                    :src="helper.convertIdToImage(hero.hero_id, heros)"
                   />
                 </figure>
               </div>
@@ -147,15 +150,7 @@ import { computed } from "vue";
 import store from "../store/index";
 import json from "../assets/constants/apiUrls.json";
 import heros from "../assets/constants/hero_names.json";
-
-function convertIdToImage(id, list) {
-  let entries = Object.entries(list[0]);
-  for (let i = 0; i < entries.length; i++) {
-    if (id == entries[i][1].id) {
-      return entries[i][1].img;
-    }
-  }
-}
+import helper from "../helpers/conversions.js";
 
 export default {
   components: { SwordCross, EmoticonDead, CheckBold, Handshake },
@@ -182,7 +177,7 @@ export default {
       matchInfo,
       wlInfo,
       heros,
-      convertIdToImage,
+      helper,
     };
   },
 };

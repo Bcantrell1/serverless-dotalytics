@@ -30,7 +30,7 @@
         </router-link>
       </div>
       <div class="navbar-end">
-        <div class="navbar-item">
+        <div class="m-2">
           <div class="buttons">
             <router-link class="button is-light" v-if="!isLoggedIn" to="/login"
               >Login</router-link
@@ -83,4 +83,22 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.navbar-item {
+  background-color: #21262d;
+}
+.navbar-item:hover {
+  color: #ed7899;
+  background-color: #0d1117;
+}
+.navbar-item:focus {
+  border-style: inset;
+  color: #ed7899;
+  border-color: #ed7899;
+  background-color: #0d1117;
+}
+
+router-link {
+  background-color: #21262d;
+}
+</style>
