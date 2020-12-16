@@ -39,19 +39,19 @@
         <div class="tile is-ancestor has-text-centered">
           <div class="tile is-parent">
             <article class="tile is-child box">
-              <p class="title">
+              <p class="title text-offset">
                 Games: {{ wlInfo.data.win + wlInfo.data.lose }}
               </p>
             </article>
           </div>
           <div class="tile is-parent">
             <article class="tile is-child box">
-              <p class="title">Wins: {{ wlInfo.data.win }}</p>
+              <p class="title text-offset">Wins: {{ wlInfo.data.win }}</p>
             </article>
           </div>
           <div class="tile is-parent">
             <article class="tile is-child box">
-              <p class="title">Loses: {{ wlInfo.data.lose }}</p>
+              <p class="title text-offset">Loses: {{ wlInfo.data.lose }}</p>
             </article>
           </div>
         </div>
@@ -79,7 +79,7 @@
             :key="hero.hero_id"
             class="column is-4"
           >
-            <div class="card">
+            <div class="card has-background-primary">
               <div class="card-image">
                 <figure class="image">
                   <img
@@ -88,9 +88,21 @@
                   />
                 </figure>
               </div>
-              <div class="block">
-                <p>Games {{ hero.games }}</p>
-                <p>Win {{ hero.win }}</p>
+              <div
+                class="is-flex is-justify-content-space-between m-2 mx-6 is-size-5 has-text-centered "
+              >
+                <div class="box has-background-dark has-text-light">
+                  <p>
+                    Games<br />
+                    <strong class="has-text-light">{{ hero.games }}</strong>
+                  </p>
+                </div>
+                <div class="box has-background-dark has-text-light">
+                  <p>
+                    Wins<br />
+                    <strong class="has-text-light">{{ hero.win }}</strong>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -150,7 +162,7 @@ import { computed } from "vue";
 import store from "../store/index";
 import json from "../assets/constants/apiUrls.json";
 import heros from "../assets/constants/hero_names.json";
-import helper from "../helpers/conversions.js";
+import helper from "../helpers/functions.js";
 
 export default {
   components: { SwordCross, EmoticonDead, CheckBold, Handshake },
@@ -184,8 +196,11 @@ export default {
 </script>
 
 <style lang="scss">
-.info {
-  min-height: 300px;
-  max-height: 300px;
+.box {
+  width: 6rem;
+  height: 6rem;
+}
+.text-offset {
+  padding-top: 10px;
 }
 </style>

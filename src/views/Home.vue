@@ -11,7 +11,7 @@
           </div>
         </div>
         <span class="scroll-down animated zoomIn">
-          <img src="../assets/images/Dota2_Logo.svg" alt="Dota 2 Logo" />
+          <img src="../assets/images/dota_nav.svg" alt="Dota 2 Logo" />
         </span>
       </div>
     </div>

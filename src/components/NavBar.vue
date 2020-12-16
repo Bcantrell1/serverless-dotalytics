@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar has-background-primary"
+    class="navbar has-background-primary "
     role="navigation"
     aria-label="main navigation"
   >
@@ -20,8 +20,11 @@
       </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
+    <div
+      id="navbarBasicExample"
+      class="navbar-menu has-background-primary has-text-centered"
+    >
+      <div class="navbar-start ">
         <router-link class="navbar-item" to="/">
           Home
         </router-link>
@@ -97,7 +100,6 @@ export default {
   border-color: #ed7899;
   background-color: #0d1117;
 }
-
 router-link {
   background-color: #21262d;
 }

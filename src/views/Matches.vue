@@ -46,7 +46,9 @@
                 <div class="content m-3">
                   <figure class="avatar">
                     <div class="rad">
-                      <img :src="convertIdToImage(players.hero_id, heros)" />
+                      <img
+                        :src="helper.convertIdToImage(players.hero_id, heros)"
+                      />
                     </div>
                   </figure>
                 </div>
@@ -76,37 +78,39 @@
                   <div class="image">
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_0, items)"
+                      :src="helper.convertIdToImage(players.item_0, items)"
                     />
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_1, items)"
-                    />
-                  </div>
-                  <div class="image">
-                    <img
-                      class="items m-2"
-                      :src="convertIdToImage(players.item_2, items)"
-                    />
-                    <img
-                      class="items m-2"
-                      :src="convertIdToImage(players.item_3, items)"
+                      :src="helper.convertIdToImage(players.item_1, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_4, items)"
+                      :src="helper.convertIdToImage(players.item_2, items)"
                     />
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_5, items)"
+                      :src="helper.convertIdToImage(players.item_3, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_neutral, items)"
+                      :src="helper.convertIdToImage(players.item_4, items)"
+                    />
+                    <img
+                      class="items m-2"
+                      :src="helper.convertIdToImage(players.item_5, items)"
+                    />
+                  </div>
+                  <div class="image">
+                    <img
+                      class="items m-2"
+                      :src="
+                        helper.convertIdToImage(players.item_neutral, items)
+                      "
                     />
                   </div>
                 </div>
@@ -152,7 +156,9 @@
                 <div class="content m-3">
                   <figure class="avatar">
                     <div class="dire">
-                      <img :src="convertIdToImage(players.hero_id, heros)" />
+                      <img
+                        :src="helper.convertIdToImage(players.hero_id, heros)"
+                      />
                     </div>
                   </figure>
                 </div>
@@ -182,37 +188,39 @@
                   <div class="image">
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_0, items)"
+                      :src="helper.convertIdToImage(players.item_0, items)"
                     />
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_1, items)"
-                    />
-                  </div>
-                  <div class="image">
-                    <img
-                      class="items m-2"
-                      :src="convertIdToImage(players.item_2, items)"
-                    />
-                    <img
-                      class="items m-2"
-                      :src="convertIdToImage(players.item_3, items)"
+                      :src="helper.convertIdToImage(players.item_1, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_4, items)"
+                      :src="helper.convertIdToImage(players.item_2, items)"
                     />
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_5, items)"
+                      :src="helper.convertIdToImage(players.item_3, items)"
                     />
                   </div>
                   <div class="image">
                     <img
                       class="items m-2"
-                      :src="convertIdToImage(players.item_neutral, items)"
+                      :src="helper.convertIdToImage(players.item_4, items)"
+                    />
+                    <img
+                      class="items m-2"
+                      :src="helper.convertIdToImage(players.item_5, items)"
+                    />
+                  </div>
+                  <div class="image">
+                    <img
+                      class="items m-2"
+                      :src="
+                        helper.convertIdToImage(players.item_neutral, items)
+                      "
                     />
                   </div>
                 </div>
@@ -226,24 +234,24 @@
       </section>
     </div>
   </div>
+  <div class="is-hidden">
+    {{ APIChartData() }}
+  </div>
+  <div class="container">
+    <canvas id="game-chart"></canvas>
+  </div>
 </template>
 
 <script>
 import makeAPICall from "../hooks/makeAPICall";
-import { computed } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import json from "../assets/constants/apiUrls.json";
 import heros from "../assets/constants/hero_names.json";
 import items from "../assets/constants/items.json";
-
-function convertIdToImage(id, list) {
-  let entries = Object.entries(list[0]);
-  for (let i = 0; i < entries.length; i++) {
-    if (id == entries[i][1].id) {
-      return entries[i][1].img;
-    }
-  }
-}
+import Chart from "chart.js";
+import ChartData from "../helpers/chart-data";
+import helper from "../helpers/functions";
 
 export default {
   setup() {
@@ -251,13 +259,76 @@ export default {
     const matchId = route.params.id;
     const matchesCall = makeAPICall(matchId, json.matches);
     const matchInfo = computed(() => matchesCall);
+    const chart = onMounted(() =>
+      helper.createChart("game-chart", APIChartData())
+    );
+
+    function APIChartData() {
+      let chartObject = {
+        type: "line",
+        data: {
+          //Minutes in game
+          labels: [],
+          datasets: [
+            {
+              // GPM line graph
+              label: "GPM",
+              data: [],
+              backgroundColor: [
+                "rgba(54,73,93,.5)", // Blue
+              ],
+              borderColor: ["#36495d"],
+              borderWidth: 3,
+            },
+            {
+              // XPM line graph
+              label: "XPM",
+              data: [],
+              backgroundColor: [
+                "rgba(71, 183,132,.5)", // Green
+              ],
+              borderColor: ["#47b784"],
+              borderWidth: 3,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          lineTension: 1,
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  padding: 25,
+                },
+              },
+            ],
+          },
+        },
+      };
+      let matchData = JSON.parse(JSON.stringify(matchInfo));
+      ///Minutes to labels
+      for (let i = 0; i < matchData._value.data.radiant_gold_adv.length; i++) {
+        chartObject.data.labels.push(i);
+        chartObject.data.datasets[0].data.push(
+          matchData._value.data.radiant_gold_adv[i]
+        );
+        chartObject.data.datasets[1].data.push(
+          matchData._value.data.radiant_xp_adv[i]
+        );
+      }
+      return chartObject;
+    }
 
     return {
+      helper,
       matchInfo,
       route,
       items,
       heros,
-      convertIdToImage,
+      chart,
+      APIChartData,
     };
   },
 };
