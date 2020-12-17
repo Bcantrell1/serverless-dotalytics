@@ -244,7 +244,7 @@
 
 <script>
 import makeAPICall from "../hooks/makeAPICall";
-import { computed, onMounted, onUnmounted } from "vue";
+import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import json from "../assets/constants/apiUrls.json";
 import heros from "../assets/constants/hero_names.json";
@@ -259,9 +259,6 @@ export default {
     const matchId = route.params.id;
     const matchesCall = makeAPICall(matchId, json.matches);
     const matchInfo = computed(() => matchesCall);
-    const chart = onMounted(() =>
-      helper.createChart("game-chart", APIChartData())
-    );
 
     function APIChartData() {
       let chartObject = {
@@ -321,13 +318,14 @@ export default {
       return chartObject;
     }
 
+    onMounted(() => helper.createChart("game-chart", APIChartData()));
+
     return {
       helper,
       matchInfo,
       route,
       items,
       heros,
-      chart,
       APIChartData,
     };
   },
