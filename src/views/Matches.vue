@@ -232,11 +232,12 @@
           </div>
         </div>
       </section>
+      <div class="is-hidden">
+        {{ helper.createChart("game-chart", APIChartData()) }}
+      </div>
     </div>
   </div>
-  <div class="is-hidden">
-    {{ APIChartData() }}
-  </div>
+
   <div class="container">
     <canvas id="game-chart"></canvas>
   </div>
@@ -305,6 +306,7 @@ export default {
         },
       };
       let matchData = JSON.parse(JSON.stringify(matchInfo));
+      console.log(matchData);
       ///Minutes to labels
       for (let i = 0; i < matchData._value.data.radiant_gold_adv.length; i++) {
         chartObject.data.labels.push(i);
@@ -317,8 +319,6 @@ export default {
       }
       return chartObject;
     }
-
-    onMounted(() => helper.createChart("game-chart", APIChartData()));
 
     return {
       helper,
